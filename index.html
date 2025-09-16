@@ -39,7 +39,7 @@
 
         }
         .submit-button {
-            margin: left 10px;
+            margin : 10px;
             background: #885df1;
             color: white;
             border: none;
@@ -48,7 +48,7 @@
             border-radius: 50px;
             padding: 14px 24px;
         }
-        .instructions {
+        .instruction {
             padding: 16px;
             border: 1px solid rgba(39, 33, 66, 0.5);
             width: 80%;
@@ -70,10 +70,7 @@
             text-align: center;
             font-size: 15px;
             margin-top: 30px;
-        }
-        
-
-        
+        }  
     </style>
 </head>
 <body>
@@ -90,7 +87,7 @@
     </main>
     <script>
         function generatePoem(event) {
-            event.preventtDefault();
+            event.preventDefault();
 
           new Typewriter('#poem', {
           strings:"Nature's first green is gold,Her hardest hue to hold",
