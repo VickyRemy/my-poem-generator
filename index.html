@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+
     
     <title>AI Poem Generator</title>
 
@@ -80,18 +82,28 @@
     <h1>Welcome to My Poem generator</h1>
     </header>
     <main>
-        <form>
+        <form id="poem-generator-form">
             <input type = "text" placeholder="Enter the topic of the poem" autofocus required autocomplete="off" class="instruction" />
             <input type = "submit" class="submit-button" />
         </form>
-        <div class="poem"> Nature's first green is gold,
-              Her hardest hue to hold.
-         <br />
-              Her early leaf's a flower;
-              But only so an hour.
-
-        </div>
+        <div class="poem" id="poem"></div>
     </main>
+    <script>
+        function generatePoem(event) {
+            event.preventtDefault();
+
+          new Typewriter('#poem', {
+          strings:"Nature's first green is gold,Her hardest hue to hold",
+          autoStart: true,
+          cursor: "",
+          delay: 1,
+          });
+              
+        }
+        
+        let poemFormElement = document.querySelector("#poem-generator-form");
+        poemFormElement.addEventListener("submit", generatePoem)
+    </script>
     </body>
 
     <footer>
