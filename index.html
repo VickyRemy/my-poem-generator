@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
     <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
 
     
@@ -80,29 +81,37 @@
     </header>
     <main>
         <form id="poem-generator-form">
-            <input type = "text" placeholder="Enter the topic of the poem" autofocus required autocomplete="off" class="instruction" />
+            <input type = "text" placeholder="Enter the topic of the poem" autofocus required autocomplete="off" class="instruction" id="instruction" />
             <input type = "submit" class="submit-button" />
         </form>
         <div class="poem" id="poem"></div>
     </main>
     <script>
-        function generatePoem(event) {
-            event.preventDefault();
-
+        function displayPoem(response) {
           new Typewriter('#poem', {
-          strings:"Nature's first green is gold,Her hardest hue to hold",
+          strings: response.data.answer,
           autoStart: true,
           cursor: "",
           delay: 1,
           });
-              
+        }
+
+        function generatePoem(event) {
+            event.preventDefault();
+            
+            let instructionInput = document.querySelector("#instruction");
+
+            let apiKey = "09bdf26t323b4a9f4410fdob3dbedc7c";
+            let prompt =`User instruction: Generate an English poem about ${instructionInput.value}`;
+            let context = "Generate a soulful, nostalgic poem about soul music set in a jazz club. Use vivid imagery (vinyl records, saxophones, dim lights) and write it in 4 short rhyming verses, capturing the emotional power and cultural roots of the genre in just 4 lines";
+            let apiUrl = `https://api.shecodes.io/ai/v1/generate?prompt=${prompt}&context=${context}&key=${apiKey}`;
+
+            axios.get(apiUrl).then(displayPoem);
         }
         
         let poemFormElement = document.querySelector("#poem-generator-form");
         poemFormElement.addEventListener("submit", generatePoem)
     </script>
-    </body>
-
     <footer>
         This AI project was coded by Vicky Makombore and is <a href="https://github.com/VickyRemy/my-poem-generator" target="blank">
             open-sourced on GitHub
